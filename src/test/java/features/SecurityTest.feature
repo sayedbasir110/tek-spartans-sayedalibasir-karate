@@ -13,6 +13,8 @@ Feature: API testing for security functions
       """
     When method post
     Then status 200
+    Then print response
+    Then assert response.username == "supervisor"
 
   @UserStory2
   Scenario Outline: Valid token with invalid credentials
@@ -25,7 +27,9 @@ Feature: API testing for security functions
       """
     When method post
     Then status <statusCode>
+    Then print response
+    Then assert response.errorMessage == "<error>"
     Examples:
-      | username   | password       | statusCode |
-      | invalid    | tek_supervisor | 404        |
-      | supervisor | wrongpassword  | 400        |
+      | username   | password       | statusCode | error                  |
+      | invalid    | tek_supervisor | 404        | User invalid not found |
+      | supervisor | wrongpassword  | 400        | Password not matched   |
