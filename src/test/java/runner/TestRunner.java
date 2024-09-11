@@ -6,7 +6,7 @@ public class TestRunner {
     @Karate.Test
     Karate runTest(){
         return Karate.run("classpath:features/")
-                .tags("@NewAccount_2")
+                .tags("GetAccounts_2")
                 .karateEnv("qa");
     }
 }
