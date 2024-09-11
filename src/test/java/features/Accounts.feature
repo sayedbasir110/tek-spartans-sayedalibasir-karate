@@ -1,4 +1,5 @@
 Feature: Testing Account APIs
+
 Background: Setup test
 Given url BASE_URL
   * def generateTokenResult = callonce read('GenerateSupervisorToken.feature')
@@ -15,8 +16,8 @@ Given url BASE_URL
     Then status 200
     Then assert response.primaryPerson.id == accountId
 
-    @Account_2
-  Scenario: Testing /api/accounts/get-account
+  @Account_2
+  Scenario: Testing get-account with non-existing accountId
   * def accountId = 55225522
       Given param primaryPersonId = accountId
       When method get
