@@ -1,6 +1,6 @@
 Feature: API testing for security functions
   Background: Setup test
-    Given url 'https://dev.insurance-api.tekschool-students.com'
+    Given url BASE_URL
     Given path '/api/token'
   @UserStory1
   Scenario: Valid token with valid credentials
