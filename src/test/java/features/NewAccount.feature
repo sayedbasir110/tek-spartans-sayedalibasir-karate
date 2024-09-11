@@ -3,10 +3,11 @@ Feature: Creating new account API test
   Scenario: Testing /api/accounts/add-primary-account
     Given url BASE_URL
     And path "/api/accounts/add-primary-account"
+    And def email = "johndoe123@hotmail.com"
     And request
     """
     {
-      "email": "johndoe@email.com",
+      "email": "#(email)",
       "firstName": "JOHN",
       "lastName": "DOE",
       "title": "Mr.",
@@ -19,4 +20,13 @@ Feature: Creating new account API test
     When method post
     Then status 201
     And print response
-    And assert response.email == "johndoe@email.com"
+    And assert response.email == email
+    # delete the created account
+    * def createdAccountId = response.id
+    * def tokenGenerationResult = callonce read('GenerateSupervisorToken.feature')
+    * def validToken = "Bearer " + tokenGenerationResult.response.token
+    Given path "/api/accounts/delete-account"
+    And param primaryPersonId = createdAccountId
+    And header Authorization = validToken
+    When method delete
+    Then status 202
