@@ -9,7 +9,7 @@ Given url BASE_URL
   And header Authorization = validToken
 
   @Account_1
-  Scenario: Testing /api/accounts/get-account
+  Scenario: Testing /api/accounts/get-account with existing accountId
     * def accountId = 9479
     Given param primaryPersonId = accountId
     When method get
@@ -17,9 +17,10 @@ Given url BASE_URL
     Then assert response.primaryPerson.id == accountId
 
   @Account_2
-  Scenario: Testing get-account with non-existing accountId
+  Scenario: Testing /api/accounts/get-account with non-existing accountId
   * def accountId = 55225522
       Given param primaryPersonId = accountId
       When method get
       Then status 404
+      And print response
       Then assert response.errorMessage == "Account with id "+accountId+" not found"
