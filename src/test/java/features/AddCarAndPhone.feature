@@ -1,5 +1,5 @@
 Feature: Add car and phone API test
-  @AddCarAndPhone_1
+  @AddCarAndPhone
   Scenario: Add car and phone to account with valid token
     * def newAccount = callonce read('NewAccount.feature@NewAccount_2')
     * def newAccountId = newAccount.response.id
