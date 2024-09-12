@@ -1,6 +1,6 @@
 Feature: Testing profile APIs
   @Profile_1
-  Scenario Outline: Testing /api/user/profile with supervisor and operator credentials
+  Scenario Outline: Testing /api/user/profile with different users
     Given url BASE_URL
     And path "/api/token"
     And request
