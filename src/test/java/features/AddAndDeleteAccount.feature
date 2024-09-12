@@ -21,8 +21,7 @@ Feature: Add and delete account API test
     Then status 201
     And assert response.firstName == "JOHN"
     * def newAccountId = response.id
-    Given url BASE_URL
-    And path "/api/token"
+    Given path "/api/token"
     And request
       """
       {
