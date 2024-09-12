@@ -13,7 +13,7 @@ Feature: Testing profile APIs
     And method post
     Then status 200
     * def token = response.token
-    And path "/api/user/profile"
+    Given path "/api/user/profile"
     And header Authorization = "Bearer " + token
     When method get
     Then status 200
