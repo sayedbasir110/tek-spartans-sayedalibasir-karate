@@ -1,27 +1,10 @@
 Feature: Add and delete account API test
   @AddAndDeleteAccount_1
   Scenario Outline: Add and delete account with different user
+    * def createAccount = callonce read('NewAccount.feature@NewAccount_2')
+    * def newAccountId = createAccount.response.id
     Given url BASE_URL
-    And path "/api/accounts/add-primary-account"
-    * def email = Java.type('data.RandomEmail').generateRandomEmail()
-    And request
-      """
-      {
-        "email": "#(email)",
-        "firstName": "JOHN",
-        "lastName": "DOE",
-        "title": "Mr.",
-        "gender": "Male",
-        "maritalStatus": "Single",
-        "employmentStatus": "Test Engineer",
-        "dateOfBirth": "1996-01-01"
-      }
-      """
-    When method post
-    Then status 201
-    And assert response.firstName == "JOHN"
-    * def newAccountId = response.id
-    Given path "/api/token"
+    And path "/api/token"
     And request
       """
       {
